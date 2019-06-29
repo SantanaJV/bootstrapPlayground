@@ -10,87 +10,79 @@
         <table class="table table-borderless mb-0">
           <tbody>
             <tr>
-              <td class="p-1">
-                <button class="btn btn-light btn-block">A</button>
-              </td>
-              <td class="p-1">
-                <button (click)="clearInput()" class="btn btn-light btn-block">
-                  C
-                </button>
-              </td>
-              <td class="p-1">
-                <button (click)="erase()" class="btn btn-light btn-block">
-                  Erase
-                </button>
-              </td>
-              <td class="p-1">
+              <td colspan="2" class="p-1">
                 <button (click)="clear()" class="btn btn-light btn-block">
-                  <strong>Clear</strong>
+                  <strong>C</strong>
+                </button>
+              </td>
+              <td colspan="2" class="p-1">
+                <button (click)="erase()" class="btn btn-light btn-block">
+                  E
                 </button>
               </td>
             </tr>
             <tr>
               <td class="p-1">
-                <button (click)="digit(1)" class="btn btn-light btn-block">
+                <button (click)="digit('1')" class="btn btn-light btn-block">
                   1
                 </button>
               </td>
               <td class="p-1">
-                <button (click)="digit(2)" class="btn btn-light btn-block">
+                <button (click)="digit('2')" class="btn btn-light btn-block">
                   2
                 </button>
               </td>
               <td class="p-1">
-                <button (click)="digit(3)" class="btn btn-light btn-block">
+                <button (click)="digit('3')" class="btn btn-light btn-block">
                   3
                 </button>
               </td>
               <td class="p-1">
-                <button (click)="divide()" class="btn btn-light btn-block">
+                <button (click)="digit('/')" class="btn btn-light btn-block">
                   <strong>&divide;</strong>
                 </button>
               </td>
             </tr>
             <tr>
               <td class="p-1">
-                <button (click)="digit(4)" class="btn btn-light btn-block">
+                <button (click)="digit('4')" class="btn btn-light btn-block">
                   4
                 </button>
               </td>
               <td class="p-1">
-                <button (click)="digit(5)" class="btn btn-light btn-block">
+                <button (click)="digit('5')" class="btn btn-light btn-block">
                   5
                 </button>
               </td>
               <td class="p-1">
-                <button (click)="digit(6)" class="btn btn-light btn-block">
+                <button (click)="digit('6')" class="btn btn-light btn-block">
                   6
                 </button>
               </td>
               <td class="p-1">
-                <button (click)="multiply()" class="btn btn-light btn-block">
+                <button (click)="digit('*')" class="btn btn-light btn-block">
                   <strong>&times;</strong>
                 </button>
               </td>
             </tr>
             <tr>
               <td class="p-1">
-                <button (click)="digit(7)" class="btn btn-light btn-block">
+                <button (click)="digit('7')" class="btn btn-light btn-block">
                   7
                 </button>
               </td>
               <td class="p-1">
-                <button (click)="digit(8)" class="btn btn-light btn-block">
+                <button (click)="digit('8')" class="btn btn-light btn-block">
                   8
                 </button>
               </td>
               <td class="p-1">
-                <button (click)="digit(9)" class="btn btn-light btn-block">
+                <button (click)="digit('9')" class="btn btn-light btn-block">
                   9
                 </button>
               </td>
               <td class="p-1">
-                <button (click)="subtract()" class="btn btn-light btn-block">
+                <button (click)="digit('-')" class="btn btn-light btn-block">
                   <strong>&minus;</strong>
                 </button>
               </td>
@@ -102,7 +94,7 @@
                 </button>
               </td>
               <td class="p-1">
-                <button class="btn btn-light btn-block">
+                <button (click)="digit('.')" class="btn btn-light btn-block">
                   .
                 </button>
               </td>
@@ -112,7 +104,7 @@
                 </button>
               </td>
               <td class="p-1">
-                <button (click)="add()" class="btn btn-light btn-block">
+                <button (click)="digit('+')" class="btn btn-light btn-block">
                   <strong>+</strong>
                 </button>
               </td>
