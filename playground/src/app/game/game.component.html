@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+  <div class="col-md-12 text-center my-3">
+    <h1 class="display-4">The Ultrageous Game 9000</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12 text-center">
+    <h4 class="">NUMBER: {{ number }}</h4>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+    <ul class="list-group">
+      <li class="list-group-item">
+        <button (click)="buy(4)" class="btn btn-primary">Sixteen</button>
+        {{ producer[4].amount }} Sixteens producing Producing
+        {{ producer[4].getGeneration() }} Eights.
+        <p>
+          Cost: {{ this.producer[4].numberCost }} numbers and
+          {{ this.producer[4].producerCost }} eights
+        </p>
+      </li>
+      <li class="list-group-item">
+        <button (click)="buy(3)" class="btn btn-primary">Eight</button>
+        {{ producer[3].amount }} Eights producing Producing
+        {{ producer[3].getGeneration() }} Fours.
+        <p>
+          Cost: {{ this.producer[3].numberCost }} numbers and
+          {{ this.producer[3].producerCost }} fours
+        </p>
+      </li>
+      <li class="list-group-item">
+        <button (click)="buy(2)" class="btn btn-primary">Four</button>
+        {{ producer[2].amount }} Fours producing Producing
+        {{ producer[2].getGeneration() }} Twos.
+        <p>
+          Cost: {{ this.producer[2].numberCost }} numbers and
+          {{ this.producer[2].producerCost }} Twos
+        </p>
+      </li>
+      <li class="list-group-item">
+        <button (click)="buy(1)" class="btn btn-primary">Two</button>
+        {{ producer[1].amount }} Twos producing Producing
+        {{ producer[1].getGeneration() }} Ones.
+        <p>
+          Cost: {{ this.producer[1].numberCost }} numbers and
+          {{ this.producer[1].producerCost }} Ones
+        </p>
+      </li>
+      <li class="list-group-item">
+        <button (click)="buy(0)" class="btn btn-primary">One</button>
+        {{ producer[0].amount }} Ones producing
+        {{ producer[0].getGeneration() }} numbers.
+        <p>Cost: {{ this.producer[0].numberCost }} number</p>
+      </li>
+    </ul>
+  </div>
+</div>
