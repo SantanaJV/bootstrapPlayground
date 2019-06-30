@@ -1,0 +1,17 @@
+<li class="list-group-item">
+  <button (click)="buy(1)" class="btn btn-primary">1 {{ name }}</button>
+
+  {{ producer.amount }} {{ name }} producing
+  {{ producer.getGeneration() }}
+  <span *ngIf="tier == 0; else consumer">numbers.</span>
+  <ng-template #consumer> {{ game.getProducerName(tier - 1) }}. </ng-template>
+  <button (click)="upgrade()" class="btn btn-primary float-right">
+    UPGRADE({{ producer.upgradeCost }} {{ name }})
+  </button>
+  <br />
+  Cost: {{ producer.numberCost }} numbers
+  <span *ngIf="tier > 0">
+    and {{ producer.producerCost }}
+    {{ game.getProducerName(tier - 1) }}
+  </span>
+</li>
