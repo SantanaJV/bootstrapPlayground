@@ -9,6 +9,7 @@ import { CalculatorComponent } from "./calculator/calculator.component";
 import { GameComponent } from "./game/game.component";
 import { GameProducerComponent } from "./game-producer/game-producer.component";
 import { GameService } from "./game.service";
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { GameService } from "./game.service";
     HomeComponent,
     CalculatorComponent,
     GameComponent,
-    GameProducerComponent
+    GameProducerComponent,
+    LoginComponent
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [GameService],
