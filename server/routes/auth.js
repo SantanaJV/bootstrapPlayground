@@ -43,7 +43,10 @@ router.post("/register", async (req, res) => {
     user = new User(userInfo);
     await user.save();
 
-    res.status(200).send(user);
+    let payload = user._id.toString();
+    let token = jwt.sign(payload, authConfig.secretKey);
+
+    res.status(200).send(token);
   } catch (err) {
     res.status(500).send("Error - Check console.");
   }
