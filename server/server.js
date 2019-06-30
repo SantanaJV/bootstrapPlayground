@@ -1,8 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const api = require("./routes/api");
 const config = require("config");
+const api = require("./routes/api");
 
 const dbConfig = config.get("db");
 const serverConfig = config.get("server");
