@@ -23,10 +23,6 @@ module.exports.User = mongoose.model("user", userSchema, "users");
 module.exports.userSchema = userSchema;
 module.exports.validate = user => {
   const schema = {
-    name: Joi.string()
-      .max(255)
-      .alphanum()
-      .required(),
     email: Joi.string()
       .email()
       .max(255)
