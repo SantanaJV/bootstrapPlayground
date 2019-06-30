@@ -1,6 +1,15 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 const api = require("./routes/api");
+const config = require("config");
+
+const dbConfig = config.get("db");
+const serverConfig = config.get("server");
+
+mongoose.connect(dbConfig.uri, { useNewUrlParser: true }, () => {
+  console.log("Connected to MongoDB Cloud.");
+});
 
 const app = express();
 
@@ -11,6 +20,6 @@ app.get("/", (req, res) => {
   res.send("Welcome to the server.");
 });
 
-app.listen(3000, () => {
-  console.log("Listening on port 3000.");
+app.listen(serverConfig.port, () => {
+  console.log(`Listening on port ${serverConfig.port}.`);
 });
