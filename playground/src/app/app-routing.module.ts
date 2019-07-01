@@ -5,6 +5,7 @@ import { CalculatorComponent } from "./calculator/calculator.component";
 import { GameComponent } from "./game/game.component";
 import { LoginComponent } from "./login/login.component";
 import { AuthGuard } from "./auth.guard";
+import { RegisterComponent } from "./register/register.component";
 
 const routes: Routes = [
   {
@@ -29,6 +30,10 @@ const routes: Routes = [
   {
     path: "login",
     component: LoginComponent
+  },
+  {
+    path: "register",
+    component: RegisterComponent
   }
 ];
 
