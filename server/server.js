@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const config = require("config");
+const cors = require("cors");
 const api = require("./routes/api");
 
 const dbConfig = config.get("db");
@@ -13,6 +14,7 @@ mongoose.connect(dbConfig.uri, { useNewUrlParser: true }, () => {
 
 const app = express();
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use("/api", api);
 
