@@ -21,6 +21,12 @@ export class Producer {
   getGeneration(): number {
     return this.generation * this.amount;
   }
+
+  increaseAmount() {
+    this.amount++;
+    this.producerCost += this.baseProducerCost;
+    this.numberCost += this.baseNumberCost;
+  }
 }
 
 @Component({
@@ -61,9 +67,25 @@ export class GameProducerComponent implements OnInit {
       else this.game.producer[this.tier - 1].amount -= producerCost;
 
     this.game.number -= numberCost;
-    this.producer.amount += amount;
-    this.producer.numberCost += this.producer.baseNumberCost;
-    this.producer.producerCost += this.producer.baseProducerCost;
+    this.producer.increaseAmount();
+  }
+
+  buyMax() {
+    let numberCost = this.producer.numberCost;
+    let producerCost = this.producer.producerCost;
+
+    while (this.game.number >= numberCost) {
+      numberCost = this.producer.numberCost;
+      producerCost = this.producer.producerCost;
+
+      if (producerCost > 0) {
+        if (this.game.producer[this.tier - 1].amount < producerCost) return;
+        else this.game.producer[this.tier - 1].amount -= producerCost;
+      }
+
+      this.game.number -= numberCost;
+      this.producer.increaseAmount();
+    }
   }
 
   private upgrade() {

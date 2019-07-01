@@ -1,5 +1,6 @@
 <li class="list-group-item">
   <button (click)="buy(1)" class="btn btn-primary">1 {{ name }}</button>
+  <button (click)="buyMax()" class="btn btn-primary">Max</button>
 
   {{ producer.amount }} {{ name }} producing
   {{ producer.getGeneration() }}
@@ -9,7 +10,7 @@
     UPGRADE({{ producer.upgradeCost }} {{ name }})
   </button>
   <br />
-  Cost: {{ producer.numberCost }} numbers
+  Cost of one {{ name }}: {{ producer.numberCost }} numbers
   <span *ngIf="tier > 0">
     and {{ producer.producerCost }}
     {{ game.getProducerName(tier - 1) }}
