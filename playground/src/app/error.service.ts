@@ -15,11 +15,11 @@ export class ErrorService {
   handle(code: number): string {
     switch (code) {
       case this.ErrorCode.INVALIDCREDENTIALS:
-        return "invalid credentials";
+        return "Invalid Credentials.";
       case this.ErrorCode.ALREADYEXISTS:
-        return "already exists";
+        return "A user is already registered with this email.";
       case this.ErrorCode.NOTFOUND:
-        return "not found";
+        return "User not found.";
     }
   }
 }

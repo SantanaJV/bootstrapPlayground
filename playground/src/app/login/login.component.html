@@ -8,8 +8,11 @@
   <div class="col-md-5">
     <div class="card">
       <div class="card-body">
+        <div *ngIf="errorMessage" class="alert alert-danger">
+          {{ errorMessage }}
+        </div>
         <form>
-          <div class="form-row">
+          <div (keyUp.enter)="login()" class="form-row">
             <div class="form-group col-md-12">
               <input
                 [(ngModel)]="userData.email"

@@ -10,6 +10,7 @@ import { ErrorService } from "../error.service";
 })
 export class LoginComponent implements OnInit {
   userData = {};
+  errorMessage = "";
 
   constructor(
     private auth: AuthService,
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
     this.auth.login(this.userData).subscribe(
       res => {
         console.log(res);
-        if (res.errorCode) console.log(this.error.handle(res.errorCode));
+        if (res.errorCode) this.errorMessage = this.error.handle(res.errorCode);
         else {
           localStorage.setItem("token", res.token);
           this.router.navigate(["/home"]);

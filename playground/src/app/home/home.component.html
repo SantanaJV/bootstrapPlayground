@@ -4,5 +4,9 @@
   </div>
   <div class="col-6 text-center mb-3">
     Sweet home.
+    <br />
+    <span *ngIf="!auth.isLoggedIn()" style="color: red"
+      >You need to be logged in to use most features of the site.</span
+    >
   </div>
 </div>
