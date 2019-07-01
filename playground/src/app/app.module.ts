@@ -12,8 +12,11 @@ import { GameProducerComponent } from "./game-producer/game-producer.component";
 import { GameService } from "./game.service";
 import { LoginComponent } from "./login/login.component";
 import { AuthService } from "./auth.service";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ErrorService } from "./error.service";
+import { AuthGuard } from "./auth.guard";
+import { TokenInterceptorService } from "./token-interceptor.service";
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -23,10 +26,21 @@ import { ErrorService } from "./error.service";
     CalculatorComponent,
     GameComponent,
     GameProducerComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
-  providers: [GameService, AuthService, ErrorService],
+  providers: [
+    GameService,
+    AuthService,
+    ErrorService,
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
