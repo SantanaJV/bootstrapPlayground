@@ -32,15 +32,16 @@ router.post("/register", async (req, res) => {
     const userInfo = req.body;
 
     const { error } = validate(userInfo);
-    if (error) return res.status(400).send(error.details[0].message);
+    if (error)
+      return res.status(200).send({ errorCode: ErrorCode.INVALIDCREDENTIALS });
 
     let user = await User.findOne({ email: userInfo.email });
     if (user)
-      return res.status(400).send("User with this email already exists.");
+      return res.status(200).send({ errorCode: ErrorCode.ALREADYEXISTS });
 
-    user = await User.findOne({ name: userInfo.name });
+    /*user = await User.findOne({ name: userInfo.name });
     if (user)
-      return res.status(400).send("User with this name already exists.");
+      return res.status(200).send({errorCode: ErrorCode.ALREADYEXISTS});*/
 
     user = new User(userInfo);
     await user.save();
