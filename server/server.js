@@ -8,7 +8,8 @@ const api = require("./routes/api");
 const dbConfig = config.get("db");
 const serverConfig = config.get("server");
 
-mongoose.connect(dbConfig.uri, { useNewUrlParser: true }, () => {
+mongoose.connect(dbConfig.uri, { useNewUrlParser: true }, err => {
+  if (err) throw new Error(err);
   console.log("Connected to MongoDB Cloud.");
 });
 

@@ -2,6 +2,7 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 const { User, validate } = require("../models/user");
+const { ErrorCode } = require("../enums/error.enum");
 const router = express.Router();
 const authConfig = config.get("auth");
 
@@ -10,15 +11,16 @@ router.post("/login", async (req, res) => {
     const userInfo = req.body;
 
     const { error } = validate(userInfo);
-    if (error) return res.status(400).send(error.details[0].message);
+    if (error)
+      return res.status(200).send({ errorCode: ErrorCode.INVALIDCREDENTIALS });
 
     let user = await User.findOne(userInfo);
-    if (!user) return res.status(404).send("Invalid credentials.");
+    if (!user) return res.status(200).send({ errorCode: ErrorCode.NOTFOUND });
 
     let payload = user._id.toString();
     let token = jwt.sign(payload, authConfig.secretKey);
 
-    res.status(200).send(token);
+    res.status(200).send({ token });
   } catch (err) {
     res.status(500).send("Error - Check Console.");
     console.log(err);
@@ -46,7 +48,7 @@ router.post("/register", async (req, res) => {
     let payload = user._id.toString();
     let token = jwt.sign(payload, authConfig.secretKey);
 
-    res.status(200).send(token);
+    res.status(200).send({ token });
   } catch (err) {
     res.status(500).send("Error - Check console.");
   }

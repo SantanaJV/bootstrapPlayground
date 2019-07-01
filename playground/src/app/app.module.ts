@@ -13,6 +13,7 @@ import { GameService } from "./game.service";
 import { LoginComponent } from "./login/login.component";
 import { AuthService } from "./auth.service";
 import { HttpClientModule } from "@angular/common/http";
+import { ErrorService } from "./error.service";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { HttpClientModule } from "@angular/common/http";
     LoginComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
-  providers: [GameService, AuthService],
+  providers: [GameService, AuthService, ErrorService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
