@@ -37,6 +37,9 @@ export class Producer {
 export class GameProducerComponent implements OnInit {
   name: string;
   producer: Producer;
+  preview: boolean;
+  //previewProducer: Producer;
+
   @Input() tier = 0;
 
   constructor(private game: GameService) {}
@@ -86,6 +89,56 @@ export class GameProducerComponent implements OnInit {
       this.game.number -= numberCost;
       this.producer.increaseAmount();
     }
+  }
+
+  previewBuyMax() {
+    console.log("Just be aware of how many times this is being called.");
+    let previewProducer = new Producer(
+      Math.pow(100, this.tier),
+      this.tier == 0 ? 0 : 2 * Math.pow(10, this.tier)
+    );
+
+    previewProducer.amount = this.producer.amount;
+    previewProducer.numberCost = this.producer.numberCost;
+    previewProducer.producerCost = this.producer.producerCost;
+    previewProducer.generation = this.producer.generation;
+
+    let previewNumber = this.game.number;
+    let numberCost = previewProducer.numberCost;
+    let producerCost = previewProducer.producerCost;
+    let previewPreTierProducer: Producer;
+
+    if (producerCost > 0) {
+      previewPreTierProducer = new Producer(
+        this.game.producer[this.tier - 1].baseNumberCost,
+        this.game.producer[this.tier - 1].baseProducerCost
+      );
+
+      previewPreTierProducer.amount = this.game.producer[this.tier - 1].amount;
+      previewPreTierProducer.numberCost = this.game.producer[
+        this.tier - 1
+      ].numberCost;
+      previewPreTierProducer.producerCost = this.game.producer[
+        this.tier - 1
+      ].producerCost;
+      previewPreTierProducer.generation = this.game.producer[
+        this.tier - 1
+      ].generation;
+    }
+    while (previewNumber >= numberCost) {
+      numberCost = previewProducer.numberCost;
+      producerCost = previewProducer.producerCost;
+
+      if (producerCost > 0) {
+        if (previewPreTierProducer.amount < producerCost) break;
+        else previewPreTierProducer.amount -= producerCost;
+      }
+
+      previewNumber -= numberCost;
+      previewProducer.increaseAmount();
+    }
+
+    return previewProducer;
   }
 
   private upgrade() {

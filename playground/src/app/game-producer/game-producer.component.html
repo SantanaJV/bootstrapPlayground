@@ -1,9 +1,23 @@
 <li class="list-group-item">
   <button (click)="buy(1)" class="btn btn-primary">1 {{ name }}</button>
-  <button (click)="buyMax()" class="btn btn-primary">Max</button>
+  <button
+    (mouseover)="preview = true"
+    (mouseout)="preview = false"
+    (click)="buyMax()"
+    class="btn btn-primary"
+  >
+    Max
+  </button>
 
-  {{ producer.amount }} {{ name }} producing
+  {{ producer.amount }}
+  <span *ngIf="preview" style="color:green">
+    (+ {{ previewBuyMax().amount - producer.amount }})
+  </span>
+  {{ name }} producing
   {{ producer.getGeneration() }}
+  <span *ngIf="preview" style="color:green">
+    (+ {{ previewBuyMax().getGeneration() - producer.getGeneration() }})
+  </span>
   <span *ngIf="tier == 0; else consumer">numbers.</span>
   <ng-template #consumer> {{ game.getProducerName(tier - 1) }}. </ng-template>
   <button (click)="upgrade()" class="btn btn-primary float-right">
