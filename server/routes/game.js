@@ -10,6 +10,8 @@ router.post("/save", authMiddleware, async (req, res) => {
     if (!user) return res.status(401).send("Unauthorized request. Invalid ID.");
     user.gameData = gameData;
 
+    await user.save();
+
     res.status(200).send(user);
   } catch (err) {
     res.status(500).send("Internal error. Please try again within 5 minutes.");

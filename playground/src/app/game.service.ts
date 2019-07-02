@@ -29,12 +29,20 @@ export class GameService {
   }
 
   save() {
-    let producer;
+    let producer = [];
     this.producer.forEach(p => {
       let producerObject = { amount: 0, level: 1 };
+      producerObject.amount = p.amount;
+      producerObject.level = p.level;
+      producer.push(producerObject);
     });
-    console.log(this.producer);
-    //return this.http.post('http://localhost:3000/api/game/save', {number: this.number, producer: })
+
+    console.log(producer);
+
+    return this.http.post("http://localhost:3000/api/game/save", {
+      number: this.number,
+      producer: producer
+    });
   }
 
   load() {}
