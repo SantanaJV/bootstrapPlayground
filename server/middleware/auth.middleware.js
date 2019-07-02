@@ -22,7 +22,7 @@ module.exports = function(req, res, next) {
         .status(401)
         .send("Unauthorized request. Invalid token provided.");
 
-    req.userId = payload.subject;
+    req.userId = id;
     next();
   } catch (err) {
     res.status(401).send("Unauthorized request. Invalid token provided.");
