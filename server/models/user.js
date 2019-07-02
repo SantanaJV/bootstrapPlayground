@@ -11,6 +11,15 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     max: 255
+  },
+  gameData: {
+    number: Number,
+    producer: [
+      {
+        amount: Number,
+        level: Number
+      }
+    ]
   }
 });
 
