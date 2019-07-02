@@ -76,8 +76,6 @@ export class GameProducerComponent implements OnInit {
         ].amount += this.producer.getGeneration();
     }, 1000);
     this.name = this.game.getProducerName(this.tier);
-
-    if (this.tier == 0) this.producer.amount = 60;
   }
 
   buy() {

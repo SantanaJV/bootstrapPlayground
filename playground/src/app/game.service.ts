@@ -37,13 +37,34 @@ export class GameService {
       producer.push(producerObject);
     });
 
-    console.log(producer);
-
-    return this.http.post("http://localhost:3000/api/game/save", {
-      number: this.number,
-      producer: producer
-    });
+    this.http
+      .post("http://localhost:3000/api/game/save", {
+        number: this.number,
+        producer: producer
+      })
+      .subscribe(
+        res => {
+          console.log("Succesfully saved game.");
+        },
+        err => {
+          console.log(err);
+        }
+      );
   }
 
-  load() {}
+  load() {
+    this.http.get<any>("http://localhost:3000/api/game/load").subscribe(
+      res => {
+        this.number = res.number;
+        for (let i = 0; i < 5; i++) {
+          let producer = res.producer[i];
+          this.producer[i].amount = producer.amount;
+          this.producer[i].level = producer.level;
+        }
+      },
+      err => {
+        console.log("Error while trying to load data.");
+      }
+    );
+  }
 }

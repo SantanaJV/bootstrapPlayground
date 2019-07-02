@@ -20,15 +20,4 @@ export class GameComponent implements OnInit {
     }
     return indexes;
   }
-
-  save() {
-    this.game.save().subscribe(
-      res => {
-        console.log("Succesfully saved game.");
-      },
-      err => {
-        console.log(err);
-      }
-    );
-  }
 }
