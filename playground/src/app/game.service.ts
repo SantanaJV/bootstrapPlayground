@@ -1,5 +1,6 @@
 import { Injectable, OnInit } from "@angular/core";
 import { Producer } from "./game-producer/game-producer.component";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
   providedIn: "root"
@@ -8,7 +9,7 @@ export class GameService {
   producer: Producer[] = [];
   number: number = 1;
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   getProducerName(tier) {
     switch (tier) {
@@ -26,4 +27,15 @@ export class GameService {
         break;
     }
   }
+
+  save() {
+    let producer;
+    this.producer.forEach(p => {
+      let producerObject = { amount: 0, level: 1 };
+    });
+    console.log(this.producer);
+    //return this.http.post('http://localhost:3000/api/game/save', {number: this.number, producer: })
+  }
+
+  load() {}
 }

@@ -4,28 +4,47 @@ import { GameService } from "../game.service";
 export class Producer {
   amount = 0;
   generation = 1;
+  level = 1;
 
   baseNumberCost = 0;
   baseProducerCost = 0;
-  numberCost = 0;
-  producerCost = 0;
-  upgradeCost = 10;
+
+  get numberCost() {
+    return this.baseNumberCost * (this.amount + 1);
+  }
+  get producerCost() {
+    return this.baseProducerCost * (this.amount + 1);
+  }
+  get upgradeCost() {
+    return Math.pow(10, this.level);
+  }
 
   constructor(numberCost, producerCost) {
     this.baseNumberCost = numberCost;
     this.baseProducerCost = producerCost;
-    this.numberCost = this.baseNumberCost;
-    this.producerCost = this.baseProducerCost;
   }
 
   getGeneration(): number {
     return this.generation * this.amount;
   }
 
-  increaseAmount() {
-    this.amount++;
-    this.producerCost += this.baseProducerCost;
-    this.numberCost += this.baseNumberCost;
+  upgrade() {
+    this.amount -= this.upgradeCost;
+    this.level++;
+    this.generation *= 2;
+  }
+
+  increaseAmount(number, preProducer: Producer): number {
+    if (number >= this.numberCost) {
+      if (preProducer != undefined) {
+        if (preProducer.amount >= this.producerCost)
+          preProducer.amount -= this.producerCost;
+        else return number;
+      }
+      number -= this.numberCost;
+      this.amount++;
+    }
+    return number;
   }
 }
 
@@ -38,7 +57,6 @@ export class GameProducerComponent implements OnInit {
   name: string;
   producer: Producer;
   preview: boolean;
-  //previewProducer: Producer;
 
   @Input() tier = 0;
 
@@ -58,94 +76,60 @@ export class GameProducerComponent implements OnInit {
         ].amount += this.producer.getGeneration();
     }, 1000);
     this.name = this.game.getProducerName(this.tier);
+
+    if (this.tier == 0) this.producer.amount = 60;
   }
 
-  buy(amount: number) {
-    let numberCost = this.producer.numberCost * amount;
-    let producerCost = this.producer.producerCost * amount;
-
-    if (this.game.number < numberCost) return;
-    if (producerCost > 0)
-      if (this.game.producer[this.tier - 1].amount < producerCost) return;
-      else this.game.producer[this.tier - 1].amount -= producerCost;
-
-    this.game.number -= numberCost;
-    this.producer.increaseAmount();
+  buy() {
+    this.game.number = this.producer.increaseAmount(
+      this.game.number,
+      this.game.producer[this.tier - 1]
+    );
   }
 
   buyMax() {
-    let numberCost = this.producer.numberCost;
-    let producerCost = this.producer.producerCost;
-
-    while (this.game.number >= numberCost) {
-      numberCost = this.producer.numberCost;
-      producerCost = this.producer.producerCost;
-
-      if (producerCost > 0) {
-        if (this.game.producer[this.tier - 1].amount < producerCost) return;
-        else this.game.producer[this.tier - 1].amount -= producerCost;
-      }
-
-      this.game.number -= numberCost;
-      this.producer.increaseAmount();
+    let number = this.producer.increaseAmount(
+      this.game.number,
+      this.game.producer[this.tier - 1]
+    );
+    while (number != this.game.number) {
+      this.game.number = number;
+      number = this.producer.increaseAmount(
+        this.game.number,
+        this.game.producer[this.tier - 1]
+      );
     }
   }
 
   previewBuyMax() {
-    console.log("Just be aware of how many times this is being called.");
-    let previewProducer = new Producer(
+    let _producer = new Producer(
       Math.pow(100, this.tier),
       this.tier == 0 ? 0 : 2 * Math.pow(10, this.tier)
     );
 
-    previewProducer.amount = this.producer.amount;
-    previewProducer.numberCost = this.producer.numberCost;
-    previewProducer.producerCost = this.producer.producerCost;
-    previewProducer.generation = this.producer.generation;
+    let _preProducer =
+      this.tier == 0
+        ? undefined
+        : new Producer(Math.pow(100, this.tier - 1), Math.pow(10, this.tier));
 
-    let previewNumber = this.game.number;
-    let numberCost = previewProducer.numberCost;
-    let producerCost = previewProducer.producerCost;
-    let previewPreTierProducer: Producer;
+    _producer.amount = this.producer.amount;
+    _producer.generation = this.producer.generation;
+    if (_preProducer)
+      _preProducer.amount = this.game.producer[this.tier - 1].amount;
 
-    if (producerCost > 0) {
-      previewPreTierProducer = new Producer(
-        this.game.producer[this.tier - 1].baseNumberCost,
-        this.game.producer[this.tier - 1].baseProducerCost
-      );
-
-      previewPreTierProducer.amount = this.game.producer[this.tier - 1].amount;
-      previewPreTierProducer.numberCost = this.game.producer[
-        this.tier - 1
-      ].numberCost;
-      previewPreTierProducer.producerCost = this.game.producer[
-        this.tier - 1
-      ].producerCost;
-      previewPreTierProducer.generation = this.game.producer[
-        this.tier - 1
-      ].generation;
-    }
-    while (previewNumber >= numberCost) {
-      numberCost = previewProducer.numberCost;
-      producerCost = previewProducer.producerCost;
-
-      if (producerCost > 0) {
-        if (previewPreTierProducer.amount < producerCost) break;
-        else previewPreTierProducer.amount -= producerCost;
-      }
-
-      previewNumber -= numberCost;
-      previewProducer.increaseAmount();
+    let _number = this.game.number;
+    let _currentNumber = _number;
+    _currentNumber = _producer.increaseAmount(_number, _preProducer);
+    while (_number != _currentNumber) {
+      _number = _currentNumber;
+      _currentNumber = _producer.increaseAmount(_number, _preProducer);
     }
 
-    return previewProducer;
+    return _producer;
   }
 
   private upgrade() {
-    if (this.producer.amount < this.producer.upgradeCost) return;
-
-    this.producer.amount -= this.producer.upgradeCost;
-    this.producer.generation *= 2;
-    this.producer.upgradeCost *= 10;
+    if (this.producer.amount >= this.producer.upgradeCost)
+      this.producer.upgrade();
   }
 }

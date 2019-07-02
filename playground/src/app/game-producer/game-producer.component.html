@@ -11,12 +11,14 @@
 
   {{ producer.amount }}
   <span *ngIf="preview" style="color:green">
-    (+ {{ previewBuyMax().amount - producer.amount }})
+    ({{ previewBuyMax().amount }}) (+{{
+      previewBuyMax().amount - producer.amount
+    }})
   </span>
   {{ name }} producing
   {{ producer.getGeneration() }}
   <span *ngIf="preview" style="color:green">
-    (+ {{ previewBuyMax().getGeneration() - producer.getGeneration() }})
+    (+{{ previewBuyMax().getGeneration() - producer.getGeneration() }})
   </span>
   <span *ngIf="tier == 0; else consumer">numbers.</span>
   <ng-template #consumer> {{ game.getProducerName(tier - 1) }}. </ng-template>

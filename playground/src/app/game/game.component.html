@@ -4,10 +4,12 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-12 text-center">
+<div class="row justify-content-center">
+  <div class="col-8 text-center">
     <h4 class="">NUMBER: {{ this.game.number }}</h4>
   </div>
+  <button (click)="game.save()" class="btn btn-info mb-3">Save</button>
+  <button class="btn btn-success ml-2 mb-3">Load</button>
 </div>
 
 <div class="row mb-5 justify-content-center">
