@@ -1,24 +1,28 @@
-<div class="row justify-content-center">
-  <div class="col-md-12 text-center my-3">
-    <h1 class="display-4">The Outrageous Game 9000</h1>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-12 text-center my-3">
+      <h1 class="display-4">The Outrageous Game 9000</h1>
+    </div>
   </div>
-</div>
 
-<div class="row justify-content-center">
-  <div class="col-8 text-center">
-    <h4 class="">NUMBER: {{ this.game.number }}</h4>
+  <div class="row justify-content-center">
+    <div class="col-8 text-center">
+      <h4 class="">NUMBER: {{ this.game.number }}</h4>
+    </div>
+    <button (click)="game.save()" class="btn btn-info mb-3">Save</button>
+    <button (click)="game.load()" class="btn btn-success ml-2 mb-3">
+      Load
+    </button>
   </div>
-  <button (click)="game.save()" class="btn btn-info mb-3">Save</button>
-  <button (click)="game.load()" class="btn btn-success ml-2 mb-3">Load</button>
-</div>
 
-<div class="row mb-5 justify-content-center">
-  <div class="col-md-10">
-    <ul class="list-group">
-      <app-game-producer
-        *ngFor="let i of generateArray(5)"
-        [tier]="i"
-      ></app-game-producer>
-    </ul>
+  <div class="row mb-5 justify-content-center">
+    <div class="col-md-10">
+      <ul class="list-group">
+        <app-game-producer
+          *ngFor="let i of generateArray(5)"
+          [tier]="i"
+        ></app-game-producer>
+      </ul>
+    </div>
   </div>
 </div>
