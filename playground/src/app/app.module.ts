@@ -17,6 +17,7 @@ import { ErrorService } from "./error.service";
 import { AuthGuard } from "./auth.guard";
 import { TokenInterceptorService } from "./token-interceptor.service";
 import { RegisterComponent } from './register/register.component';
+import { ShopComponent } from './shop/shop.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { RegisterComponent } from './register/register.component';
     GameComponent,
     GameProducerComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ShopComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [
