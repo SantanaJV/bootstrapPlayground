@@ -5,8 +5,8 @@ import { Product } from "./classes/product.class";
   providedIn: "root"
 })
 export class ShopService {
-  products: Product[];
-  cart: { product: Product; amount: number }[];
+  products: Product[] = [];
+  cart: { product: Product; amount: number }[] = [];
 
   constructor() {
     let product = new Product();
@@ -14,7 +14,7 @@ export class ShopService {
     product.name = "Notebook Gamer";
     product.description =
       "Notebook pika pra krl das galáxias perdidas do mundo de atlântida do norte";
-    product.shortDescripton = "Notebook pka pra krl";
+    product.shortDescription = "Notebook pka pra krl";
     product.price = 9999.99;
     product.discount = 0;
     product.specifications = [
@@ -24,18 +24,17 @@ export class ShopService {
       "Processador Octacore Intel i9",
       "GPU 4GB Ryzen"
     ];
-    otherProduct.name = "Notebook Gamer";
+    otherProduct.name = "Notebook Ordinário";
     otherProduct.description =
-      "Notebook pika pra krl das galáxias perdidas do mundo de atlântida do norte";
-    otherProduct.shortDescripton = "Notebook pka pra krl";
-    otherProduct.price = 9999.99;
+      "Notebook ordinário da Razer com tela Full HD, 2GB de memória, placa de vídeo integrada.";
+    otherProduct.shortDescription = "Notebook ordinário da Razer";
+    otherProduct.price = 1999.99;
     otherProduct.discount = 0;
     otherProduct.specifications = [
-      "16GB de Memória Ram",
-      "SSD WDGreen 480GB",
-      "HD WDGreen 1TB",
-      "Processador Octacore Intel i9",
-      "GPU 4GB Ryzen"
+      "2GB de Memória Ram",
+      "HD WDGreen 500GB",
+      "Processador Pentium 3ª Geração",
+      "GPU integrada"
     ];
 
     this.products.push(product);

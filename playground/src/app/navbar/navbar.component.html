@@ -76,7 +76,10 @@
           routerActive="active"
           active
         >
-          Cart <span class="badge badge-primary"> {{ shop.items.length }}</span>
+          Cart
+          <span *ngIf="shop.cart.length > 0" class="badge badge-primary">
+            {{ shop.cart.length }}
+          </span>
         </a>
         <a
           *ngIf="!auth.isLoggedIn()"

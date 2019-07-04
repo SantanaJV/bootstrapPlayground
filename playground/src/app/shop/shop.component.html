@@ -19,7 +19,7 @@
     </div>
     <div class="col-md-10">
       <div class="row no-gutters">
-        <div *ngFor="let item of items" class="col-md-4 p-1">
+        <div *ngFor="let product of products" class="col-md-4 p-1">
           <div class="card">
             <img
               src="http://lorempixel.com/400/200"
@@ -27,18 +27,18 @@
               class="card-img-top"
             />
             <div class="card-body position-relative clearfix">
-              <h5 class="card-title">{{ item.product }}</h5>
+              <h5 class="card-title">{{ product.name }}</h5>
               <p class="card-text">
-                {{ item.description }}
+                {{ product.shortDescription }}
               </p>
               <div class="float-left">
                 <h3 class="mb-0">
-                  <i style="color: green">$ {{ item.correctPrice }}</i>
+                  <i style="color: green">$ {{ product.correctedPrice() }}</i>
                 </h3>
-                <small *ngIf="item.discount > 0" class="text-muted"
-                  >From: ${{ item.price
+                <small *ngIf="product.discount > 0" class="text-muted"
+                  >From: ${{ product.price
                   }}<strong style="color: green"
-                    >(-{{ item.discount }}%)</strong
+                    >(-{{ product.discount }}%)</strong
                   ></small
                 >
               </div>
