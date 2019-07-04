@@ -4,11 +4,12 @@ import { CartComponent } from "./cart/cart.component";
 import { ShopComponent } from "./shop.component";
 import { ShopService } from "./shop.service";
 import { FormsModule } from "@angular/forms";
+import { ProductComponent } from "./product/product.component";
 
 @NgModule({
-  declarations: [CartComponent, ShopComponent],
+  declarations: [CartComponent, ShopComponent, ProductComponent],
   imports: [CommonModule, FormsModule],
-  exports: [ShopComponent, CartComponent],
+  exports: [ShopComponent, CartComponent, ProductComponent],
   providers: [ShopService]
 })
 export class ShopModule {}

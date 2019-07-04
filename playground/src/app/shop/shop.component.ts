@@ -23,6 +23,6 @@ export class ShopComponent implements OnInit {
   }
 
   showDetails(product: Product) {
-    this.router.navigate(["/home"]);
+    this.router.navigate(["/product", product.id]);
   }
 }
