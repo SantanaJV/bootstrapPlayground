@@ -38,7 +38,7 @@ export class GameService {
     });
 
     this.http
-      .post("http://localhost:3000/api/game/save", {
+      .post("http://192.168.3.149:3000/api/game/save", {
         number: this.number,
         producer: producer
       })
@@ -53,7 +53,7 @@ export class GameService {
   }
 
   load() {
-    this.http.get<any>("http://localhost:3000/api/game/load").subscribe(
+    this.http.get<any>("http://192.168.3.149:3000/api/game/load").subscribe(
       res => {
         this.number = res.number;
         for (let i = 0; i < 5; i++) {
