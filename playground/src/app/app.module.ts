@@ -16,9 +16,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ErrorService } from "./error.service";
 import { AuthGuard } from "./auth.guard";
 import { TokenInterceptorService } from "./token-interceptor.service";
-import { RegisterComponent } from './register/register.component';
-import { ShopComponent } from './shop/shop.component';
-import { CartComponent } from './cart/cart.component';
+import { RegisterComponent } from "./register/register.component";
+import { ShopComponent } from "./shop/shop.component";
+import { CartComponent } from "./cart/cart.component";
+import { CartService } from "./cart.service";
+import { GameModule } from "./game/game.module";
 
 @NgModule({
   declarations: [
@@ -33,11 +35,18 @@ import { CartComponent } from './cart/cart.component';
     ShopComponent,
     CartComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    GameModule
+  ],
   providers: [
     GameService,
     AuthService,
     ErrorService,
+    CartService,
     AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,

@@ -69,6 +69,16 @@
     <ul class="navbar-nav">
       <li class="nav-item">
         <a
+          *ngIf="auth.isLoggedIn()"
+          href=""
+          class="nav-link"
+          routerLink="/cart"
+          routerActive="active"
+          active
+        >
+          Cart <span class="badge badge-primary"> {{ cart.items.length }}</span>
+        </a>
+        <a
           *ngIf="!auth.isLoggedIn()"
           href=""
           class="nav-link"

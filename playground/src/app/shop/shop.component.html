@@ -43,12 +43,52 @@
                 >
               </div>
               <div class="position-absolute" style="bottom: 20px; right: 20px;">
-                <button class="btn btn-outline-warning mr-2">Cart</button>
+                <button
+                  type="button"
+                  data-toggle="modal"
+                  data-target="#modal"
+                  class="btn btn-outline-warning mr-2"
+                >
+                  Cart
+                </button>
                 <button class="btn btn-success">BUY</button>
               </div>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal Title</h5>
+        <button type="button" class="close" data-dismiss="modal">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                Quantity
+              </span>
+            </div>
+            <input type="number" class="form-control" min="0" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">
+          Add to cart
+        </button>
       </div>
     </div>
   </div>
