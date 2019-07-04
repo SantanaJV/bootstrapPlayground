@@ -7,9 +7,13 @@
   <div class="row">
     <div class="col-md-2">
       <ul class="list-group">
-        <button class="list-group-item list-group-item-action"></button>
-        <button class="list-group-item list-group-item-action">Item 1</button>
-        <button class="list-group-item list-group-item-action">Item 1</button>
+        <button class="list-group-item list-group-item-action">
+          Eletrônicos
+        </button>
+        <button class="list-group-item list-group-item-action">Comida</button>
+        <button class="list-group-item list-group-item-action">
+          Eletrodomésticos
+        </button>
         <button class="list-group-item list-group-item-action">Game</button>
       </ul>
     </div>
@@ -22,7 +26,7 @@
               alt=""
               class="card-img-top"
             />
-            <div class="card-body position-relative">
+            <div class="card-body position-relative clearfix">
               <h5 class="card-title">{{ item.product }}</h5>
               <p class="card-text">
                 {{ item.description }}
@@ -40,7 +44,7 @@
               </div>
               <div class="position-absolute" style="bottom: 20px; right: 20px;">
                 <button class="btn btn-outline-warning mr-2">Cart</button>
-                <button class="btn btn-danger">BUY</button>
+                <button class="btn btn-success">BUY</button>
               </div>
             </div>
           </div>
