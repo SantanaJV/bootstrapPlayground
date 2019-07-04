@@ -14,35 +14,38 @@
       </ul>
     </div>
     <div class="col-md-10">
-      <ul class="p-0">
-        <div class="card">
-          <div class="row no-gutters">
-            <div class="col-md-2">
-              <img
-                style="width: 100px; height: 75px"
-                src="../../assets/placeholder.jpg"
-                class="card-img"
-                alt=""
-              />
+      <div class="row no-gutters">
+        <div *ngFor="let item of items" class="col-md-4 p-1">
+          <div class="card">
+            <img
+              src="http://lorempixel.com/400/200"
+              alt=""
+              class="card-img-top"
+            />
+            <div class="card-body position-relative">
+              <h5 class="card-title">{{ item.product }}</h5>
+              <p class="card-text">
+                {{ item.description }}
+              </p>
+              <div class="float-left">
+                <h3 class="mb-0">
+                  <i style="color: green">$ {{ item.correctPrice }}</i>
+                </h3>
+                <small *ngIf="item.discount > 0" class="text-muted"
+                  >From: ${{ item.price
+                  }}<strong style="color: green"
+                    >(-{{ item.discount }}%)</strong
+                  ></small
+                >
+              </div>
+              <div class="position-absolute" style="bottom: 20px; right: 20px;">
+                <button class="btn btn-outline-warning mr-2">Cart</button>
+                <button class="btn btn-danger">BUY</button>
+              </div>
             </div>
           </div>
         </div>
-
-        <!--<li class="list-group-item p-2">
-          <div class="row no-gutters">
-            <img class="float-left" src="../../assets/placeholder.jpg" />
-            <h4 class="ml-4 d-inline align-top">Item</h4>
-            <p class="mb-0 text-muted" style="margin-left: 120px;">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-              sapien felis, tempus vitae mattis vitae, efficitur quis elit. Sed
-              magna nisi, fringilla ac varius et, euismod eu dolor.
-            </p>
-            <button class="btn btn-success position-static float-right">
-              Buy
-            </button>
-          </div>
-        </li>-->
-      </ul>
+      </div>
     </div>
   </div>
 </div>
