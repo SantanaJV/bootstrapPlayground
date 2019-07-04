@@ -13,6 +13,15 @@ import { FormsModule } from "@angular/forms";
   declarations: [LoginComponent, RegisterComponent],
   imports: [CommonModule, FormsModule],
   exports: [LoginComponent, RegisterComponent],
-  providers: [AuthService, ErrorService, AuthGuard]
+  providers: [
+    AuthService,
+    ErrorService,
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
+  ]
 })
 export class AuthModule {}

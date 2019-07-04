@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../auth/auth.service";
-import { CartService } from "../cart.service";
+import { ShopService } from "../shop/shop.service";
 
 @Component({
   selector: "app-navbar",
@@ -8,7 +8,7 @@ import { CartService } from "../cart.service";
   styleUrls: ["./navbar.component.css"]
 })
 export class NavbarComponent implements OnInit {
-  constructor(private auth: AuthService, private cart: CartService) {}
+  constructor(private auth: AuthService, private shop: ShopService) {}
 
   ngOnInit() {}
 }

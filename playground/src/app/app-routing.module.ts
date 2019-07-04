@@ -7,7 +7,7 @@ import { LoginComponent } from "./auth/login/login.component";
 import { AuthGuard } from "./auth/auth.guard";
 import { RegisterComponent } from "./auth/register/register.component";
 import { ShopComponent } from "./shop/shop.component";
-import { CartComponent } from "./cart/cart.component";
+import { CartComponent } from "./shop/cart/cart.component";
 
 const routes: Routes = [
   {
