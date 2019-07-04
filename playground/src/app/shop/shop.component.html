@@ -25,9 +25,17 @@
               src="http://lorempixel.com/400/200"
               alt=""
               class="card-img-top"
+              (click)="showDetails(product)"
+              style="cursor: pointer"
             />
             <div class="card-body position-relative clearfix">
-              <h5 class="card-title">{{ product.name }}</h5>
+              <h5
+                class="card-title"
+                (click)="showDetails(product)"
+                style="cursor:pointer"
+              >
+                {{ product.name }}
+              </h5>
               <p class="card-text">
                 {{ product.shortDescription }}
               </p>

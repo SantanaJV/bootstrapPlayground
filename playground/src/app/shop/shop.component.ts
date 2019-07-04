@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Product } from "./classes/product.class";
 import { ShopService } from "./shop.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-shop",
@@ -11,7 +12,7 @@ export class ShopComponent implements OnInit {
   products: Product[] = [];
   selectedProduct: Product = new Product();
 
-  constructor(private shop: ShopService) {}
+  constructor(private shop: ShopService, private router: Router) {}
 
   ngOnInit() {
     this.products = this.shop.products;
@@ -19,5 +20,9 @@ export class ShopComponent implements OnInit {
 
   selectProduct(product: Product) {
     this.selectedProduct = Product.clone(product);
+  }
+
+  showDetails(product: Product) {
+    this.router.navigate(["/home"]);
   }
 }

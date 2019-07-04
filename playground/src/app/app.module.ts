@@ -7,13 +7,10 @@ import { AppComponent } from "./app.component";
 import { NavbarComponent } from "./navbar/navbar.component";
 import { HomeComponent } from "./home/home.component";
 import { CalculatorComponent } from "./calculator/calculator.component";
-import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { HttpClientModule } from "@angular/common/http";
 import { GameModule } from "./game/game.module";
 import { AuthModule } from "./auth/auth.module";
-import { TokenInterceptorService } from "./auth/token-interceptor.service";
-import { AuthService } from "./auth/auth.service";
 import { ShopModule } from "./shop/shop.module";
-import { ShopService } from "./shop/shop.service";
 
 @NgModule({
   declarations: [
