@@ -3,9 +3,9 @@ import { Routes, RouterModule } from "@angular/router";
 import { HomeComponent } from "./home/home.component";
 import { CalculatorComponent } from "./calculator/calculator.component";
 import { GameComponent } from "./game/game.component";
-import { LoginComponent } from "./login/login.component";
-import { AuthGuard } from "./auth.guard";
-import { RegisterComponent } from "./register/register.component";
+import { LoginComponent } from "./auth/login/login.component";
+import { AuthGuard } from "./auth/auth.guard";
+import { RegisterComponent } from "./auth/register/register.component";
 import { ShopComponent } from "./shop/shop.component";
 import { CartComponent } from "./cart/cart.component";
 
