@@ -7,9 +7,6 @@ import { AppComponent } from "./app.component";
 import { NavbarComponent } from "./navbar/navbar.component";
 import { HomeComponent } from "./home/home.component";
 import { CalculatorComponent } from "./calculator/calculator.component";
-import { GameComponent } from "./game/game.component";
-import { GameProducerComponent } from "./game-producer/game-producer.component";
-import { GameService } from "./game.service";
 import { LoginComponent } from "./login/login.component";
 import { AuthService } from "./auth.service";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
@@ -28,8 +25,6 @@ import { GameModule } from "./game/game.module";
     NavbarComponent,
     HomeComponent,
     CalculatorComponent,
-    GameComponent,
-    GameProducerComponent,
     LoginComponent,
     RegisterComponent,
     ShopComponent,
@@ -43,7 +38,6 @@ import { GameModule } from "./game/game.module";
     GameModule
   ],
   providers: [
-    GameService,
     AuthService,
     ErrorService,
     CartService,
