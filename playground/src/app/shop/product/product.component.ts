@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Product } from "../classes/product.class";
 import { ShopService } from "../shop.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "app-product",
@@ -13,7 +13,11 @@ export class ProductComponent implements OnInit {
   private sub: any;
   product: Product;
 
-  constructor(private shop: ShopService, private route: ActivatedRoute) {}
+  constructor(
+    private shop: ShopService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
@@ -29,5 +33,9 @@ export class ProductComponent implements OnInit {
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+  }
+
+  return() {
+    this.router.navigate(["/shop"]);
   }
 }
