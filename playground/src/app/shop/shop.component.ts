@@ -9,10 +9,15 @@ import { ShopService } from "./shop.service";
 })
 export class ShopComponent implements OnInit {
   products: Product[] = [];
+  selectedProduct: Product = new Product();
 
   constructor(private shop: ShopService) {}
 
   ngOnInit() {
     this.products = this.shop.products;
+  }
+
+  selectProduct(product: Product) {
+    this.selectedProduct = Product.clone(product);
   }
 }

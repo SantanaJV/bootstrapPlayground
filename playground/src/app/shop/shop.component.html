@@ -33,17 +33,20 @@
               </p>
               <div class="float-left">
                 <h3 class="mb-0">
-                  <i style="color: green">$ {{ product.correctedPrice() }}</i>
+                  <i style="color: green"
+                    >$ {{ product.correctedPrice().toFixed(2) }}</i
+                  >
                 </h3>
-                <small *ngIf="product.discount > 0" class="text-muted"
-                  >From: ${{ product.price
-                  }}<strong style="color: green"
-                    >(-{{ product.discount }}%)</strong
-                  ></small
-                >
+                <small *ngIf="product.discount > 0" class="text-muted">
+                  From: ${{ product.price.toFixed(2) }}
+                  <strong style="color: green">
+                    (-{{ product.discount }}%)
+                  </strong>
+                </small>
               </div>
               <div class="position-absolute" style="bottom: 20px; right: 20px;">
                 <button
+                  (click)="selectProduct(product)"
                   type="button"
                   data-toggle="modal"
                   data-target="#modal"
@@ -65,7 +68,9 @@
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal Title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">
+          {{ selectedProduct.name }}
+        </h5>
         <button type="button" class="close" data-dismiss="modal">
           <span>&times;</span>
         </button>
@@ -78,7 +83,14 @@
                 Quantity
               </span>
             </div>
-            <input type="number" class="form-control" min="0" />
+            <input
+              [(ngModel)]="selectedProduct.amount"
+              name="productAmount"
+              type="number"
+              class="form-control"
+              min="1"
+              value="1"
+            />
           </div>
         </form>
       </div>
@@ -86,7 +98,12 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">
           Close
         </button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">
+        <button
+          (click)="shop.addToCart(selectedProduct, selectedProduct.amount)"
+          type="button"
+          class="btn btn-primary"
+          data-dismiss="modal"
+        >
           Add to cart
         </button>
       </div>
