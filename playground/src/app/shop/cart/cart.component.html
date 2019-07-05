@@ -16,7 +16,14 @@
             <th><img src="http://lorempixel.com/100/50" alt="" /></th>
             <td class="align-middle">{{ product.name }}</td>
             <td class="align-middle">{{ product.shortDescription }}</td>
-            <td class="align-middle">{{ product.amount }}</td>
+            <td class="align-middle">
+              <input
+                [(ngModel)]="product.amount"
+                type="number"
+                class="form-control"
+                min="1"
+              />
+            </td>
             <td class="align-middle">{{ product.fullPrice().toFixed(2) }}</td>
           </tr>
         </tbody>

@@ -6,17 +6,69 @@
       </h3>
     </div>
     <div class="row card-body">
-      <div class="col-md-9">
-        {{ product.description }}
+      <div class="col-md-8">
+        <section>
+          <p>
+            {{ product.description }}
+          </p>
+        </section>
+        <section>
+          <h3>Especificações</h3>
+          <ul>
+            <li *ngFor="let specification of product.specifications">
+              {{ specification }}
+            </li>
+          </ul>
+        </section>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-4">
         <div class="card">
           <img src="http://lorempixel.com/180/150" alt="" class="card-img" />
-          <div class="card-body">
-            Compre agora mesmo!
+          <div *ngIf="product.discount == 0" class="card-header text-center">
+            <h5 class="card-title mb-0 text-center">
+              $<span style="color:green">{{
+                product.correctedPrice().toFixed(2)
+              }}</span>
+            </h5>
           </div>
-          <div class="card-footer">
-            <button class="btn btn-success">BUY</button>
+          <div *ngIf="product.discount > 0" class="card-header text-center">
+            <h2 class="card-title mb-0">
+              $<span style="color:green">{{
+                product.correctedPrice().toFixed(2)
+              }}</span
+              >!!
+            </h2>
+            <small class="text-muted"
+              >From {{ product.price.toFixed(2) }}
+              <span style="color:green"> (-{{ product.discount }}%) </span>
+            </small>
+            <br />
+            <small class="text-muted">
+              Promo ends on 06/07/2019
+            </small>
+          </div>
+          <div class="card-header p-0">
+            <button class="btn btn-outline-success w-100 h-100">
+              <span class="display-4">
+                BUY
+              </span>
+            </button>
+          </div>
+          <div class="card-body">
+            <h4>Parcelamento</h4>
+            <table class="table table-striped ">
+              <tbody>
+                <tr *ngFor="let installment of shop.installments">
+                  <td>
+                    <small>
+                      {{ installment }}x of $
+                      {{ (product.correctedPrice() / installment).toFixed(2) }}
+                      interest-free
+                    </small>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

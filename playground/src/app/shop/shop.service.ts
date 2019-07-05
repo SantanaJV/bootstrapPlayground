@@ -7,6 +7,7 @@ import { Product } from "./classes/product.class";
 export class ShopService {
   products: Product[] = [];
   cart: Product[] = [];
+  installments: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12];
 
   constructor() {
     let product = new Product();
@@ -14,7 +15,7 @@ export class ShopService {
     product.id = "0";
     product.name = "Notebook Gamer";
     product.description =
-      "Notebook pika pra krl das galáxias perdidas do mundo de atlântida do norte";
+      "Notebook pika pra krl das galáxias perdidas do mundo de atlântida do norte. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tincidunt quis justo vitae venenatis. Morbi suscipit risus sit amet velit tristique scelerisque. Quisque faucibus sapien ut massa facilisis, et ullamcorper ex dictum. Duis a fermentum enim, sed egestas felis. Phasellus cursus leo vitae tincidunt maximus. Ut risus enim, mattis non tempor sit amet, efficitur eu magna. Donec ac tempus justo, ac pulvinar sapien. Mauris aliquam ullamcorper volutpat. Pellentesque in est accumsan, egestas nisi vel, rhoncus tellus. Integer egestas velit ut ex accumsan ornare.";
     product.shortDescription = "Notebook pka pra krl";
     product.price = 9999.99;
     product.discount = 20;
@@ -28,7 +29,7 @@ export class ShopService {
     otherProduct.id = "1";
     otherProduct.name = "Notebook Ordinário";
     otherProduct.description =
-      "Notebook ordinário da Razer com tela Full HD, 2GB de memória, placa de vídeo integrada.";
+      "Notebook ordinário da Razer com tela Full HD, 2GB de memória, placa de vídeo integrada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tincidunt quis justo vitae venenatis. Morbi suscipit risus sit amet velit tristique scelerisque. Quisque faucibus sapien ut massa facilisis, et ullamcorper ex dictum. Duis a fermentum enim, sed egestas felis. Phasellus cursus leo vitae tincidunt maximus. Ut risus enim, mattis non tempor sit amet, efficitur eu magna. Donec ac tempus justo, ac pulvinar sapien. Mauris aliquam ullamcorper volutpat. Pellentesque in est accumsan, egestas nisi vel, rhoncus tellus. Integer egestas velit ut ex accumsan ornare.";
     otherProduct.shortDescription = "Notebook ordinário da Razer";
     otherProduct.price = 1999.99;
     otherProduct.discount = 0;
