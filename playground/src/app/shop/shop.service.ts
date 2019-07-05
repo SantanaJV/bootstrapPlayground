@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Product } from "./classes/product.class";
 import { HttpClient } from "@angular/common/http";
 import { AuthService } from "../auth/auth.service";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: "root"
@@ -11,7 +12,11 @@ export class ShopService {
   cart: Product[] = [];
   installments: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12];
 
-  constructor(private http: HttpClient, private auth: AuthService) {
+  constructor(
+    private http: HttpClient,
+    private auth: AuthService,
+    private router: Router
+  ) {
     http.get<any>("http://localhost:3000/api/shop/products").subscribe(
       res => {
         res.products.forEach(p => {
@@ -57,6 +62,10 @@ export class ShopService {
   }
 
   addToCart(product: Product, amount: number = 1) {
+    if (!this.auth.isLoggedIn()) {
+      this.router.navigate(["/login"]);
+      return;
+    }
     let productFound = false;
 
     for (let i = 0; i < this.cart.length; i++) {
@@ -91,11 +100,29 @@ export class ShopService {
     this.updateCart();
   }
 
+  isOnCart(product: Product): boolean {
+    this.cart.forEach(p => {
+      if (p.id == product.id) {
+        console.log(true);
+        return true;
+      }
+    });
+    console.log(false);
+    return false;
+  }
+
   updateCart() {
+    if (!this.auth.isLoggedIn()) {
+      this.router.navigate(["/login"]);
+      return;
+    }
     let products = [];
 
     for (let i = 0; i < this.cart.length; i++) {
-      if (this.cart[i].amount == 0) this.cart.splice(i, 1);
+      if (this.cart[i].amount == 0) {
+        this.cart.splice(i, 1);
+        i--;
+      }
     }
 
     this.cart.forEach(p => {

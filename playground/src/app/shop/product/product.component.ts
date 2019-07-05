@@ -10,8 +10,13 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class ProductComponent implements OnInit {
   @Input() product: Product;
+  bol: Boolean;
 
   constructor(private shop: ShopService) {}
 
   ngOnInit() {}
+
+  setToTrue() {
+    this.bol = true;
+  }
 }

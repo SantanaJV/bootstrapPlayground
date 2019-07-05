@@ -48,9 +48,19 @@
             </small>
           </div>
           <div class="card-header p-0">
-            <button class="btn btn-outline-success w-100 h-100">
+            <button
+              *ngIf="!bol"
+              (click)="setToTrue()"
+              class="btn btn-outline-warning w-100 h-100"
+            >
               <span class="display-4">
-                BUY
+                <fa-icon class="mr-2" icon="cart-plus" size="xl"></fa-icon>
+                CART
+              </span>
+            </button>
+            <button *ngIf="bol" class="btn btn-success w-100 h-100" disabled>
+              <span class="display-4">
+                ADDED
               </span>
             </button>
           </div>

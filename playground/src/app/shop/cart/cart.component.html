@@ -39,13 +39,6 @@
               >
                 +
               </button>
-              <button
-                *ngIf="isEditing"
-                (click)="updateCart()"
-                class="btn btn-success"
-              >
-                Apply
-              </button>
             </td>
             <td class="align-middle">{{ product.fullPrice().toFixed(2) }}</td>
           </tr>
@@ -54,11 +47,17 @@
     </div>
   </div>
   <div class="float-left">
-    <button (click)="toggleEditing()" class="btn btn-warning">
+    <button (click)="toggleEditing()" class="btn btn-danger">
       <span *ngIf="isEditing">Stop Editing</span>
       <span *ngIf="!isEditing">Edit</span>
     </button>
-    <button class="btn btn-success ml-2">Apply</button>
+    <button
+      *ngIf="isEditing"
+      (click)="updateCart()"
+      class="btn btn-success ml-2"
+    >
+      Apply
+    </button>
   </div>
   <div class="float-right">
     $<span style="color:green">{{ shop.getCartPrice().toFixed(2) }}</span>
