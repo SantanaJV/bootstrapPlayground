@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Product } from "./classes/product.class";
 import { HttpClient } from "@angular/common/http";
+import { AuthService } from "../auth/auth.service";
 
 @Injectable({
   providedIn: "root"
@@ -10,7 +11,7 @@ export class ShopService {
   cart: Product[] = [];
   installments: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private auth: AuthService) {
     http.get<any>("http://localhost:3000/api/shop/products").subscribe(
       res => {
         res.products.forEach(p => {
@@ -24,29 +25,31 @@ export class ShopService {
           product.specifications = p.specifications;
           this.products.push(product);
         });
-        console.log(this.products);
-        http.get<any>("http://localhost:3000/api/shop/cart").subscribe(
-          res => {
-            res.products.forEach(p => {
-              let product = this.products.find(element => {
-                return element.id == p.productId;
-              });
-              if (product) {
-                product.amount = p.amount;
-                this.cart.push(product);
-              }
-            });
-            console.log(this.cart);
-          },
-          err => {
-            console.log("Shop service constructor get cart: " + err);
-          }
-        );
       },
       err => {
         console.log("Shop service constructor get products: " + err);
       }
     );
+    if (auth.isLoggedIn())
+      http.get<any>("http://localhost:3000/api/shop/cart").subscribe(
+        res => {
+          res.products.forEach(p => {
+            let product: Product = new Product();
+            product.id = p._id;
+            product.name = p.name;
+            product.description = p.description;
+            product.price = p.price;
+            product.discount = p.discount;
+            product.amount = p.amount;
+            product.shortDescription = p.shortDescription;
+            product.specifications = p.specifications;
+            this.cart.push(product);
+          });
+        },
+        err => {
+          console.log("Shop service constructor get cart: " + err);
+        }
+      );
   }
 
   getProducts() {

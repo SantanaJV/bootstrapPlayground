@@ -9,7 +9,23 @@ const router = express.Router();
 router.get("/cart", authMiddleware, async (req, res) => {
   try {
     let user = await User.findById(req.userId);
-    let products = user.cart;
+    let productIdArray = [];
+
+    user.cart.forEach(p => {
+      productIdArray.push(p.productId);
+    });
+
+    let products = await Product.find({ _id: { $in: productIdArray } });
+
+    products.forEach(p => {
+      user.cart.forEach(c => {
+        if (p._id.toString() == c.productId) {
+          p.amount = c.amount;
+        }
+      });
+    });
+
+    console.log(products);
     res.status(200).send({ products });
   } catch (err) {
     res.status(500).send("Internal error. Please try again within 5 minutes.");
