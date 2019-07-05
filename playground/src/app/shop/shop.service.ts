@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Product } from "./classes/product.class";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
   providedIn: "root"
@@ -9,39 +10,30 @@ export class ShopService {
   cart: Product[] = [];
   installments: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12];
 
-  constructor() {
-    let product = new Product();
-    let otherProduct = new Product();
-    product.id = "0";
-    product.name = "Notebook Gamer";
-    product.description =
-      "Notebook pika pra krl das galáxias perdidas do mundo de atlântida do norte. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tincidunt quis justo vitae venenatis. Morbi suscipit risus sit amet velit tristique scelerisque. Quisque faucibus sapien ut massa facilisis, et ullamcorper ex dictum. Duis a fermentum enim, sed egestas felis. Phasellus cursus leo vitae tincidunt maximus. Ut risus enim, mattis non tempor sit amet, efficitur eu magna. Donec ac tempus justo, ac pulvinar sapien. Mauris aliquam ullamcorper volutpat. Pellentesque in est accumsan, egestas nisi vel, rhoncus tellus. Integer egestas velit ut ex accumsan ornare.";
-    product.shortDescription = "Notebook pka pra krl";
-    product.price = 9999.99;
-    product.discount = 20;
-    product.specifications = [
-      "16GB de Memória Ram",
-      "SSD WDGreen 480GB",
-      "HD WDGreen 1TB",
-      "Processador Octacore Intel i9",
-      "GPU 4GB Ryzen"
-    ];
-    otherProduct.id = "1";
-    otherProduct.name = "Notebook Ordinário";
-    otherProduct.description =
-      "Notebook ordinário da Razer com tela Full HD, 2GB de memória, placa de vídeo integrada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tincidunt quis justo vitae venenatis. Morbi suscipit risus sit amet velit tristique scelerisque. Quisque faucibus sapien ut massa facilisis, et ullamcorper ex dictum. Duis a fermentum enim, sed egestas felis. Phasellus cursus leo vitae tincidunt maximus. Ut risus enim, mattis non tempor sit amet, efficitur eu magna. Donec ac tempus justo, ac pulvinar sapien. Mauris aliquam ullamcorper volutpat. Pellentesque in est accumsan, egestas nisi vel, rhoncus tellus. Integer egestas velit ut ex accumsan ornare.";
-    otherProduct.shortDescription = "Notebook ordinário da Razer";
-    otherProduct.price = 1999.99;
-    otherProduct.discount = 0;
-    otherProduct.specifications = [
-      "2GB de Memória Ram",
-      "HD WDGreen 500GB",
-      "Processador Pentium 3ª Geração",
-      "GPU integrada"
-    ];
+  constructor(private http: HttpClient) {
+    http.get<any>("http://localhost:3000/api/shop/products").subscribe(
+      res => {
+        res.products.forEach(p => {
+          let product: Product = new Product();
+          product.id = p._id;
+          product.name = p.name;
+          product.description = p.description;
+          product.price = p.price;
+          product.discount = p.discount;
+          product.shortDescription = p.shortDescription;
+          product.specifications = p.specifications;
+          this.products.push(product);
+        });
+        console.log(this.products);
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
 
-    this.products.push(product);
-    this.products.push(otherProduct);
+  getProducts() {
+    return this.http.get<any>("http://localhost:3000/api/shop/products");
   }
 
   addToCart(product: Product, amount: number = 1) {
@@ -79,5 +71,9 @@ export class ShopService {
     }
 
     return price;
+  }
+
+  getCart() {
+    return this.http.get("http://localhost:3000/api/shop/cart");
   }
 }

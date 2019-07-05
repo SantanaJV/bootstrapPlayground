@@ -12,6 +12,7 @@ export class Product {
 
   constructor() {
     this.amount = 1;
+    this.discount = 0;
   }
 
   static clone(product) {

@@ -15,9 +15,7 @@ export class ShopComponent implements OnInit {
 
   constructor(private shop: ShopService, private router: Router) {}
 
-  ngOnInit() {
-    this.products = this.shop.products;
-  }
+  ngOnInit() {}
 
   selectProduct(product: Product) {
     this.selectedProduct = Product.clone(product);
@@ -30,5 +28,16 @@ export class ShopComponent implements OnInit {
 
   hideDetails() {
     this.viewingDetails = false;
+  }
+
+  getCart() {
+    this.shop.getCart().subscribe(
+      res => {
+        console.log(res);
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 }
