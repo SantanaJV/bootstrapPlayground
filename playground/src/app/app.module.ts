@@ -11,6 +11,17 @@ import { HttpClientModule } from "@angular/common/http";
 import { GameModule } from "./game/game.module";
 import { AuthModule } from "./auth/auth.module";
 import { ShopModule } from "./shop/shop.module";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+  faCartPlus,
+  faShoppingCart,
+  faHome,
+  faCalculator,
+  faGamepad,
+  faStore,
+  faSignOutAlt
+} from "@fortawesome/free-solid-svg-icons";
 
 @NgModule({
   declarations: [
@@ -26,9 +37,19 @@ import { ShopModule } from "./shop/shop.module";
     HttpClientModule,
     GameModule,
     AuthModule,
-    ShopModule
+    ShopModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {
+    library.add(faCartPlus);
+    library.add(faShoppingCart);
+    library.add(faHome);
+    library.add(faCalculator);
+    library.add(faGamepad);
+    library.add(faStore);
+  }
+}
