@@ -1,7 +1,7 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const config = require("config");
-const { User, validate } = require("../models/user");
+const { User, validate } = require("../models/user.model");
 const { ErrorCode } = require("../enums/error.enum");
 const router = express.Router();
 const authConfig = config.get("auth");

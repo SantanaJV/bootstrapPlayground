@@ -20,10 +20,19 @@ const userSchema = new mongoose.Schema({
         level: Number
       }
     ]
-  }
+  },
+  cart: [
+    {
+      productId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product"
+      },
+      amount: Number
+    }
+  ]
 });
 
-module.exports.User = mongoose.model("user", userSchema, "users");
+module.exports.User = mongoose.model("User", userSchema, "users");
 module.exports.userSchema = userSchema;
 module.exports.validate = user => {
   const schema = {
