@@ -17,18 +17,48 @@
             <td class="align-middle">{{ product.name }}</td>
             <td class="align-middle">{{ product.shortDescription }}</td>
             <td class="align-middle">
-              <input
-                [(ngModel)]="product.amount"
-                type="number"
-                class="form-control"
-                min="1"
-              />
+              <button
+                *ngIf="isEditing"
+                (click)="shop.removeFromCart(product, product.amount)"
+                class="btn btn-danger"
+              >
+                Remove from cart
+              </button>
+              {{ product.amount }}
+              <button
+                *ngIf="isEditing"
+                (click)="shop.removeFromCart(product)"
+                class="btn btn-warning ml-1"
+              >
+                -
+              </button>
+              <button
+                *ngIf="isEditing"
+                (click)="shop.addToCart(product)"
+                class="btn btn-warning mx-1"
+              >
+                +
+              </button>
+              <button
+                *ngIf="isEditing"
+                (click)="updateCart()"
+                class="btn btn-success"
+              >
+                Apply
+              </button>
             </td>
             <td class="align-middle">{{ product.fullPrice().toFixed(2) }}</td>
           </tr>
         </tbody>
       </table>
     </div>
+  </div>
+  <div class="float-left">
+    <button (click)="toggleEditing()" class="btn btn-warning">
+      <span *ngIf="isEditing">Stop Editing</span>
+      <span *ngIf="!isEditing">Edit</span>
+    </button>
+    <button class="btn btn-success ml-2">Apply</button>
   </div>
   <div class="float-right">
     $<span style="color:green">{{ shop.getCartPrice().toFixed(2) }}</span>

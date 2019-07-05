@@ -1,4 +1,5 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const { Product } = require("../models/product.model");
 const { User } = require("../models/user.model");
 const authMiddleware = require("../middleware/auth.middleware");
@@ -8,9 +9,8 @@ const router = express.Router();
 router.get("/cart", authMiddleware, async (req, res) => {
   try {
     let user = await User.findById(req.userId);
-    let products = user.products;
-    console.log(products);
-    res.status(200).send({ res: "success" });
+    let products = user.cart;
+    res.status(200).send({ products });
   } catch (err) {
     res.status(500).send("Internal error. Please try again within 5 minutes.");
     console.log(err);
@@ -43,11 +43,12 @@ router.post("/cart", authMiddleware, async (req, res) => {
   try {
     let user = await User.findById(req.userId);
     let products = req.body;
-    console.log(products);
-    user.cart.push(products);
-    console.log(user.cart);
+    products.forEach(p => {
+      p.productId = new mongoose.Types.ObjectId(p.productId);
+    });
+    user.cart = products;
     await user.save();
-    res.status(200).send(user);
+    res.status(200).send({ res: "Successfully saved data. " });
   } catch (err) {
     res.status(500).send("Internal error. Please try again within 5 minutes.");
     console.log(err);

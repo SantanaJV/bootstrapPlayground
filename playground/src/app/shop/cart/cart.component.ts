@@ -8,7 +8,18 @@ import { ShopService } from "../shop.service";
   styleUrls: ["./cart.component.css"]
 })
 export class CartComponent implements OnInit {
+  isEditing: boolean;
+
   constructor(private shop: ShopService) {}
 
   ngOnInit() {}
+
+  updateCart() {
+    this.isEditing = false;
+    this.shop.updateCart();
+  }
+
+  toggleEditing() {
+    this.isEditing = !this.isEditing;
+  }
 }

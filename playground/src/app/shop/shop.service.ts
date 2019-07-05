@@ -25,9 +25,26 @@ export class ShopService {
           this.products.push(product);
         });
         console.log(this.products);
+        http.get<any>("http://localhost:3000/api/shop/cart").subscribe(
+          res => {
+            res.products.forEach(p => {
+              let product = this.products.find(element => {
+                return element.id == p.productId;
+              });
+              if (product) {
+                product.amount = p.amount;
+                this.cart.push(product);
+              }
+            });
+            console.log(this.cart);
+          },
+          err => {
+            console.log("Shop service constructor get cart: " + err);
+          }
+        );
       },
       err => {
-        console.log(err);
+        console.log("Shop service constructor get products: " + err);
       }
     );
   }
@@ -52,15 +69,48 @@ export class ShopService {
     }
   }
 
-  removeOneFromCart(product: Product) {
+  addToCartAndUpdate(product: Product, amount: number = 1) {
+    this.addToCart(product, amount);
+    this.updateCart();
+  }
+
+  removeFromCart(product: Product, amount: number = 1) {
     for (let i = 0; i < this.cart.length; i++) {
       if (this.cart[i].id == product.id) {
-        this.cart[i].amount--;
-
-        if (this.cart[i].amount == 0) this.cart.splice(i, 1);
+        if (this.cart[i].amount > 0) this.cart[i].amount -= amount;
         break;
       }
     }
+  }
+
+  removeFromCartAndUpdate(product: Product, amount: number = 1) {
+    this.removeFromCart(product, amount);
+    this.updateCart();
+  }
+
+  updateCart() {
+    let products = [];
+
+    for (let i = 0; i < this.cart.length; i++) {
+      if (this.cart[i].amount == 0) this.cart.splice(i, 1);
+    }
+
+    this.cart.forEach(p => {
+      let product = { productId: "", amount: 0 };
+      product.productId = p.id;
+      product.amount = p.amount;
+      products.push(product);
+    });
+    this.http
+      .post<any>("http://localhost:3000/api/shop/cart", products)
+      .subscribe(
+        res => {
+          console.log(res);
+        },
+        err => {
+          console.log(err);
+        }
+      );
   }
 
   getCartPrice(): number {
