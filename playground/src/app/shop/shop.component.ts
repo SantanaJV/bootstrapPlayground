@@ -11,6 +11,7 @@ import { Router } from "@angular/router";
 export class ShopComponent implements OnInit {
   products: Product[] = [];
   selectedProduct: Product = new Product();
+  viewingDetails: boolean = false;
 
   constructor(private shop: ShopService, private router: Router) {}
 
@@ -23,6 +24,11 @@ export class ShopComponent implements OnInit {
   }
 
   showDetails(product: Product) {
-    this.router.navigate(["/product", product.id]);
+    this.selectProduct(product);
+    this.viewingDetails = true;
+  }
+
+  hideDetails() {
+    this.viewingDetails = false;
   }
 }

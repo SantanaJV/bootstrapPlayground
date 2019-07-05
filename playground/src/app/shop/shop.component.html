@@ -1,6 +1,16 @@
-<div class="row justify-content-center my-3">
-  <div class="col-md-12">
-    <h1 class="display-4 text-center">The Marvelous Shop 2.0</h1>
+<div class="container">
+  <div class="row justify-content-center my-3">
+    <div *ngIf="viewingDetails" class="col-md-2 mt-3">
+      <button
+        (click)="hideDetails()"
+        class="btn btn-warning btn-block text-left"
+      >
+        <h4 class="mb-0">&larr;</h4>
+      </button>
+    </div>
+    <div class="col-md-10">
+      <h1 class="display-4 text-center">The Marvelous Shop 2.0</h1>
+    </div>
   </div>
 </div>
 <div class="container">
@@ -18,8 +28,8 @@
       </ul>
     </div>
     <div class="col-md-10">
-      <div class="row no-gutters">
-        <div *ngFor="let product of products" class="col-md-4 p-1">
+      <div *ngIf="!viewingDetails" class="row no-gutters">
+        <div *ngFor="let product of products" class="col-md-4 px-1 pb-2">
           <div class="card">
             <img
               src="http://lorempixel.com/400/200"
@@ -67,6 +77,9 @@
             </div>
           </div>
         </div>
+      </div>
+      <div *ngIf="viewingDetails" class="container">
+        <app-product [product]="selectedProduct"></app-product>
       </div>
     </div>
   </div>
